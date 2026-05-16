@@ -225,12 +225,13 @@ Portfolio/
 │   │   └── index.css         # Global styles
 │   ├── public/               # Static assets
 │   └── index.html            # HTML template
-├── server/                   # Backend server (placeholder)
 ├── shared/                   # Shared types and constants
 ├── package.json              # Dependencies
 ├── vite.config.ts            # Vite configuration
 └── tsconfig.json             # TypeScript configuration
 ```
+
+There is no custom Node backend in this repo anymore. The site is a Vite + TypeScript frontend and can be hosted as static files.
 
 ---
 
