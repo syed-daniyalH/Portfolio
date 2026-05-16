@@ -79,6 +79,7 @@ export default function Navigation() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => scrollToSection("#contact")}
           className="hidden md:inline-flex px-6 py-2 bg-[#d4af37] text-[#0f1419] font-semibold rounded-lg hover:bg-[#e5c158] transition-all duration-300"
         >
           Get In Touch
@@ -126,6 +127,7 @@ export default function Navigation() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.05 }}
+                onClick={() => scrollToSection("#contact")}
                 className="w-full mt-4 px-4 py-3 bg-[#d4af37] text-[#0f1419] font-semibold rounded-lg hover:bg-[#e5c158] transition-all duration-300"
               >
                 Get In Touch

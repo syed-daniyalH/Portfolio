@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PORTFOLIO_DATA } from '@/const';
 import { useInView } from '@/hooks/useInView';
 import { Mail, Linkedin, Github, MessageCircle, ArrowRight } from 'lucide-react';
 
@@ -28,29 +29,29 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
+      value: PORTFOLIO_DATA.personal.email,
+      href: `mailto:${PORTFOLIO_DATA.personal.email}`,
       color: 'from-[#d4af37] to-[#f4d47d]',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'Your LinkedIn Profile',
-      href: 'https://linkedin.com',
+      value: PORTFOLIO_DATA.personal.linkedin.replace('https://', ''),
+      href: PORTFOLIO_DATA.personal.linkedin,
       color: 'from-[#4a90e2] to-[#7ab5ff]',
     },
     {
       icon: Github,
       label: 'GitHub',
-      value: 'Your GitHub Profile',
-      href: 'https://github.com',
+      value: PORTFOLIO_DATA.personal.github.replace('https://', ''),
+      href: PORTFOLIO_DATA.personal.github,
       color: 'from-[#6ba3f5] to-[#9bc5ff]',
     },
     {
       icon: MessageCircle,
       label: 'WhatsApp',
-      value: '+1 (555) 123-4567',
-      href: 'https://wa.me/1234567890',
+      value: PORTFOLIO_DATA.personal.phone,
+      href: `https://wa.me/${PORTFOLIO_DATA.personal.phone.replace(/\D/g, '')}`,
       color: 'from-[#8a95ab] to-[#bcc5d9]',
     },
   ];
@@ -161,7 +162,7 @@ const ContactSection = () => {
           <motion.div variants={itemVariants} className="mt-16 text-center">
             <motion.button
               onClick={() => {
-                window.location.href = 'mailto:your.email@example.com';
+                window.location.href = `mailto:${PORTFOLIO_DATA.personal.email}`;
               }}
               className="btn-premium-gold flex items-center gap-2 group mx-auto"
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(212,175,55,0.5)' }}

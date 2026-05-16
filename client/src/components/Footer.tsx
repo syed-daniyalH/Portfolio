@@ -26,9 +26,9 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "#", label: "Email" },
+    { icon: Github, href: PORTFOLIO_DATA.personal.github, label: "GitHub" },
+    { icon: Linkedin, href: PORTFOLIO_DATA.personal.linkedin, label: "LinkedIn" },
+    { icon: Mail, href: `mailto:${PORTFOLIO_DATA.personal.email}`, label: "Email" },
   ];
 
   return (
@@ -87,6 +87,8 @@ export default function Footer() {
                     <motion.a
                       key={idx}
                       href={social.href}
+                      target={social.label === "Email" ? undefined : "_blank"}
+                      rel={social.label === "Email" ? undefined : "noopener noreferrer"}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-3 rounded-lg bg-[#1a1f2e] border border-[#2a3f5f] text-muted-foreground hover:text-[#d4af37] hover:border-[#d4af37]/50 transition-all duration-300"
