@@ -1,0 +1,16 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "https://github.com/syed-daniyalH/Portfolio.git"
+  },
+  "name": "daniel-portfolio-v2",
+  "path": "/home/ubuntu/daniel-portfolio-v2",
+  "port": 3000,
+  "secrets": {},
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
