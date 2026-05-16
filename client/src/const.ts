@@ -1,6 +1,6 @@
 export const PORTFOLIO_DATA = {
   personal: {
-    name: "Syed Muhammad Daniyal Haider",
+    name: "Syed Daniyal Haider",
     title: "Junior AI Automation Engineer | Python Developer",
     location: "Lahore, Pakistan",
     phone: "0312-4476901",

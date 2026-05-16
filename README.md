@@ -1,4 +1,4 @@
-# 🚀 Syed Muhammad Daniyal Haider - AI Automation Engineer Portfolio
+# 🚀 Syed Daniyal Haider - AI Automation Engineer Portfolio
 
 > **Building systems that run themselves** — AI Automation Engineer specializing in end-to-end workflow automation, RAG-powered AI agents, and custom backend integrations.
 
@@ -287,4 +287,4 @@ This project is open source and available under the MIT License. See the LICENSE
 
 ---
 
-*Built with ❤️ by Syed Muhammad Daniyal Haider*
+*Built with ❤️ by Syed Daniyal Haider*

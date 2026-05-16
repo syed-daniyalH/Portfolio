@@ -180,7 +180,7 @@ const ContactSection = () => {
         className="mt-16 pt-8 border-t border-[rgba(212,175,55,0.1)] text-center"
       >
         <p className="text-[#8a95ab] text-sm">
-          © 2026 Daniel | AI Automation Engineer & Python Developer
+          © 2026 Syed Daniyal Haider | AI Automation Engineer & Python Developer
         </p>
         <p className="text-[#8a95ab] text-xs mt-2">
           Crafted with precision and powered by automation

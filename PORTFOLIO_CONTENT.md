@@ -1,4 +1,4 @@
-# Daniel's Premium Portfolio Content
+# Syed Daniyal Haider's Premium Portfolio Content
 
 ## Hero Section
 **Title**: AI Automation Engineer & Python Developer
@@ -10,7 +10,7 @@
 ## About Section
 **Headline**: About Me
 
-Daniel is a junior AI Automation Engineer with a proven track record of delivering transformative solutions to clients. With expertise in AI integration, workflow automation, and backend development, he specializes in reducing manual work and creating intelligent systems that save time and resources.
+Syed Daniyal Haider is a junior AI Automation Engineer with a proven track record of delivering transformative solutions to clients. With expertise in AI integration, workflow automation, and backend development, he specializes in reducing manual work and creating intelligent systems that save time and resources.
 
 **Key Stats**:
 - 70% average manual work reduction for clients

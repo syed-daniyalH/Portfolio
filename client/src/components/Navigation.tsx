@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { PORTFOLIO_DATA } from "@/const";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const displayName = PORTFOLIO_DATA.personal.name.split(" ").slice(0, 2).join(" ");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,9 +54,9 @@ export default function Navigation() {
           onClick={() => scrollToSection("#home")}
         >
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#4a90e2] flex items-center justify-center">
-            <span className="text-[#0f1419] font-bold text-xs leading-none">SMD</span>
+            <span className="text-[#0f1419] font-bold text-xs leading-none">SDH</span>
           </div>
-          <span className="hidden sm:inline font-bold text-foreground">Daniyal</span>
+          <span className="hidden sm:inline font-bold text-foreground">{displayName}</span>
         </motion.div>
 
         {/* Desktop Navigation */}

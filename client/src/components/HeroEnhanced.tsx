@@ -3,6 +3,10 @@ import { PORTFOLIO_DATA } from "@/const";
 import Typewriter from "./Typewriter";
 
 export default function HeroEnhanced() {
+  const nameParts = PORTFOLIO_DATA.personal.name.split(" ");
+  const firstLine = nameParts.slice(0, 2).join(" ");
+  const secondLine = nameParts.slice(2).join(" ");
+
   const taglines = [
     "I build systems that run themselves",
     "AI Automation Engineer",
@@ -70,11 +74,15 @@ export default function HeroEnhanced() {
             variants={itemVariants}
             className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
           >
-            <span className="text-foreground">SYED MUHAMMAD</span>
-            <br />
-            <span className="bg-gradient-to-r from-[#2563eb] to-[#06b6d4] bg-clip-text text-transparent">
-              DANIYAL HAIDER
-            </span>
+            <span className="text-foreground">{firstLine}</span>
+            {secondLine ? (
+              <>
+                <br />
+                <span className="bg-gradient-to-r from-[#2563eb] to-[#06b6d4] bg-clip-text text-transparent">
+                  {secondLine}
+                </span>
+              </>
+            ) : null}
           </motion.h1>
 
           {/* Typewriter tagline */}

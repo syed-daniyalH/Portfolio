@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PORTFOLIO_DATA } from "@/const";
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 
 export default function Footer() {
@@ -49,10 +50,10 @@ export default function Footer() {
             {/* Brand */}
             <motion.div variants={itemVariants}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#4a90e2] flex items-center justify-center">
-                  <span className="text-[#0f1419] font-bold">D</span>
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#4a90e2] flex items-center justify-center">
+                  <span className="text-[#0f1419] font-bold text-xs leading-none">SDH</span>
                 </div>
-                <span className="font-bold text-foreground">Daniel</span>
+                <span className="font-bold text-foreground">{PORTFOLIO_DATA.personal.name}</span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 AI Automation Engineer & Python Developer. Transforming workflows into intelligent systems.
@@ -110,7 +111,7 @@ export default function Footer() {
             variants={itemVariants}
             className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground"
           >
-            <p>© {currentYear} Daniel. All rights reserved.</p>
+            <p>© {currentYear} {PORTFOLIO_DATA.personal.name}. All rights reserved.</p>
             <div className="flex items-center gap-2">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-[#d4af37] fill-[#d4af37]" />
