@@ -12,118 +12,222 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-type WorkflowSnip = {
+type WorkflowSection = {
   title: string;
   summary: string;
   steps: string[];
 };
 
-const WORKFLOW_SNIPS: Record<number, WorkflowSnip[]> = {
-  2: [
-    {
-      title: "Twilio intake + data lookup",
-      summary:
-        "Inbound SMS is authenticated, matched against services, and checked against dealership records before dispatch logic runs.",
-      steps: [
-        "Twilio",
-        "HTTP Auth token",
-        "HTTP GET Services",
-        "HTTP GET Dealerships",
-        "Array aggregator",
-        "Services checker",
-      ],
-    },
-    {
-      title: "AI routing + response",
-      summary:
-        "The Brain decides the route, The Translator normalizes the payload, and the router returns the customer response.",
-      steps: ["The Brain", "The Translator", "Router", "HTTP", "Response", "Ignore"],
-    },
-  ],
-  3: [
-    {
-      title: "Webhook intake + OCR parse",
-      summary:
-        "Race notes and images enter the intake flow, are parsed, and move through OCR and AI extraction.",
-      steps: ["Webhooks", "JSON parser", "Set Variable", "Open AI OCR HTTP", "JSON"],
-    },
-    {
-      title: "Structured reporting",
-      summary:
-        "Extracted race metrics are normalized and written into reporting outputs for the web app and sheets.",
-      steps: [
-        "Backend POST",
-        "Router",
-        "Write to PRESSURES",
-        "Write to ALIGNMENT",
-        "Write to SUSPENSION",
-        "Tire history",
-        "Tire inventory",
-        "Tire temperatures",
-        "Tracks",
-      ],
-    },
-  ],
+type WorkflowPreview = {
+  badge: string;
+  headline: string;
+  intro: string;
+  footer: string;
+  sections: WorkflowSection[];
+  image?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
 };
 
-function SnipsDialog({
-  projectTitle,
+const WORKFLOW_PREVIEWS: Record<number, WorkflowPreview> = {
+  2: {
+    badge: "Make.com Scenarios",
+    headline: "Dispatch Alex workflow scenarios",
+    intro:
+      "These snapshots mirror the live Make.com dispatch build so visitors can inspect the intake and response flow instead of only reading a summary.",
+    footer: "Workflow snapshots from the live Make.com scenarios.",
+    sections: [
+      {
+        title: "Twilio intake + data lookup",
+        summary:
+          "Inbound SMS is authenticated, matched against services, and checked against dealership records before dispatch logic runs.",
+        steps: [
+          "Twilio",
+          "HTTP Auth token",
+          "HTTP GET Services",
+          "HTTP GET Dealerships",
+          "Array aggregator",
+          "Services checker",
+        ],
+      },
+      {
+        title: "AI routing + response",
+        summary:
+          "The Brain decides the route, The Translator normalizes the payload, and the router returns the customer response.",
+        steps: ["The Brain", "The Translator", "Router", "HTTP", "Response", "Ignore"],
+      },
+    ],
+  },
+  3: {
+    badge: "Make.com Scenarios",
+    headline: "SM2 Racing workflow scenarios",
+    intro:
+      "These snapshots show the original Make.com intake and reporting flows that turn race notes and images into structured data.",
+    footer: "Workflow snapshots from the live Make.com scenarios.",
+    sections: [
+      {
+        title: "Webhook intake + OCR parse",
+        summary:
+          "Race notes and images enter the intake flow, are parsed, and move through OCR and AI extraction.",
+        steps: ["Webhooks", "JSON parser", "Set Variable", "Open AI OCR HTTP", "JSON"],
+      },
+      {
+        title: "Structured reporting",
+        summary:
+          "Extracted race metrics are normalized and written into reporting outputs for the web app and sheets.",
+        steps: [
+          "Backend POST",
+          "Router",
+          "Write to PRESSURES",
+          "Write to ALIGNMENT",
+          "Write to SUSPENSION",
+          "Tire history",
+          "Tire inventory",
+          "Tire temperatures",
+          "Tracks",
+        ],
+      },
+    ],
+  },
+  5: {
+    badge: "n8n Workflow",
+    headline: "LinkedIn content automation workflow",
+    intro:
+      "This is the original n8n export attached to the project. It shows the full research, drafting, approval, and publishing loop behind the LinkedIn automation.",
+    footer: "Original workflow snapshot from the live n8n automation.",
+    image: {
+      src: "/workflows/n8n-linkedin-automation.jpg",
+      alt: "n8n workflow for LinkedIn content automation",
+      caption:
+        "Original n8n workflow snapshot showing the research, content generation, approval, and LinkedIn publishing path.",
+    },
+    sections: [
+      {
+        title: "Research + drafting",
+        summary:
+          "Schedule Trigger hands off to News & Topic Researcher and Odoo Content Creator to build the post direction.",
+        steps: ["Schedule Trigger", "News & Topic Researcher", "Odoo Content Creator"],
+      },
+      {
+        title: "Creative generation",
+        summary:
+          "Generate Image and Hashtag Generator prepare the visual layer and discovery layer before the outputs merge.",
+        steps: ["Generate Image", "Hashtag Generator", "Merge1"],
+      },
+      {
+        title: "Approval loop + publishing",
+        summary:
+          "The draft is sent for approval, held in a wait state, checked for approval, and then published or regenerated.",
+        steps: ["Send Approval Email1", "Wait for Approval1", "Is Approved?1", "LinkedIn2", "Regen Note"],
+      },
+    ],
+  },
+};
+
+function WorkflowPreviewDialog({
   open,
   onOpenChange,
-  snips,
+  preview,
 }: {
-  projectTitle: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  snips: WorkflowSnip[];
+  preview: WorkflowPreview;
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl border-border/80 bg-[#08111f] p-0 text-foreground shadow-2xl shadow-black/40">
+      <DialogContent className="max-w-6xl border-border/80 bg-[#08111f] p-0 text-foreground shadow-2xl shadow-black/40">
         <div className="border-b border-border/70 px-6 py-5 md:px-8">
           <DialogHeader className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                Workflow snips
+                {preview.badge}
               </span>
               <span className="rounded-full border border-border/70 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Make.com
+                {preview.image ? "Original export" : "Scenario snapshots"}
               </span>
             </div>
             <DialogTitle className="text-2xl font-semibold text-foreground md:text-3xl">
-              {projectTitle}
+              {preview.headline}
             </DialogTitle>
             <DialogDescription className="max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-              These snapshots mirror the actual workflow structure behind the project so visitors can
-              inspect the automation path instead of only reading the summary.
+              {preview.intro}
             </DialogDescription>
           </DialogHeader>
         </div>
 
         <div className="grid gap-4 p-6 md:grid-cols-2 md:p-8">
-          {snips.map((snip, idx) => (
+          {preview.image ? (
             <div
-              key={snip.title}
+              className="overflow-hidden rounded-3xl border border-border/80 bg-card/70 shadow-lg shadow-black/10 md:col-span-2"
+            >
+              <figure className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
+                <div className="bg-[#060d18] p-4 sm:p-5">
+                  <img
+                    src={preview.image.src}
+                    alt={preview.image.alt}
+                    className="h-auto w-full rounded-2xl border border-border/60 object-contain shadow-2xl shadow-black/30"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption className="flex flex-col justify-between gap-6 border-t border-border/80 p-5 lg:border-l lg:border-t-0 lg:p-6">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                      Workflow snapshot
+                    </p>
+                    <h3 className="mt-3 text-xl font-semibold text-foreground">
+                      Original n8n export
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                      {preview.image.caption}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "Schedule Trigger",
+                      "AI drafting",
+                      "Approval loop",
+                      "LinkedIn publishing",
+                    ].map((label) => (
+                      <span
+                        key={label}
+                        className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-foreground"
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          ) : null}
+
+          {preview.sections.map((section, idx) => (
+            <div
+              key={section.title}
               className="rounded-3xl border border-border/80 bg-card/70 p-5 shadow-lg shadow-black/10"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                    Snip {idx + 1}
+                    Step {idx + 1}
                   </p>
-                  <h3 className="mt-2 text-lg font-semibold text-foreground">{snip.title}</h3>
+                  <h3 className="mt-2 text-lg font-semibold text-foreground">{section.title}</h3>
                 </div>
                 <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
                   <ImageIcon className="h-5 w-5" />
                 </div>
               </div>
 
-              <p className="mt-4 text-sm leading-7 text-muted-foreground">{snip.summary}</p>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">{section.summary}</p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {snip.steps.map((step, stepIdx) => (
+                {section.steps.map((step, stepIdx) => (
                   <span
-                    key={`${snip.title}-${step}`}
+                    key={`${section.title}-${step}`}
                     className="rounded-full border border-border/80 bg-white/5 px-3 py-1.5 text-xs font-medium text-foreground"
                   >
                     {String(stepIdx + 1).padStart(2, "0")}. {step}
@@ -136,7 +240,7 @@ function SnipsDialog({
 
         <div className="flex items-center justify-between gap-3 border-t border-border/70 px-6 py-5 md:px-8">
           <p className="text-xs text-muted-foreground">
-            Workflow snapshots from the live Make.com scenarios.
+            {preview.footer}
           </p>
           <DialogClose asChild>
             <Button type="button" variant="outline" className="rounded-full border-border/80">
@@ -156,10 +260,11 @@ function ProjectCard({
   project: (typeof PORTFOLIO_DATA.projects)[number];
   featured?: boolean;
 }) {
-  const [snipsOpen, setSnipsOpen] = useState(false);
-  const projectSnips = WORKFLOW_SNIPS[project.id] ?? [];
+  const [workflowOpen, setWorkflowOpen] = useState(false);
+  const workflowPreview = WORKFLOW_PREVIEWS[project.id];
   const liveHref = project.links?.live ?? (project.liveDemo ? project.link : undefined);
-  const hasSnips = projectSnips.length > 0;
+  const hasWorkflowPreview = Boolean(workflowPreview);
+  const workflowButtonLabel = workflowPreview?.badge === "n8n Workflow" ? "View n8n Workflow" : "Make.com Scenarios";
 
   return (
     <>
@@ -235,26 +340,26 @@ function ProjectCard({
             </a>
           ) : null}
 
-          {hasSnips ? (
+          {hasWorkflowPreview ? (
             <Button
               type="button"
               variant="outline"
               className="rounded-full border-border/80"
-              onClick={() => setSnipsOpen(true)}
+              onClick={() => setWorkflowOpen(true)}
+              aria-label={`Open ${workflowButtonLabel.toLowerCase()} for ${project.title}`}
             >
-              View Snips
+              {workflowButtonLabel}
               <ImageIcon className="h-4 w-4" />
             </Button>
           ) : null}
         </div>
       </motion.article>
 
-      {hasSnips ? (
-        <SnipsDialog
-          projectTitle={`${project.title} workflow snapshots`}
-          open={snipsOpen}
-          onOpenChange={setSnipsOpen}
-          snips={projectSnips}
+      {hasWorkflowPreview && workflowPreview ? (
+        <WorkflowPreviewDialog
+          open={workflowOpen}
+          onOpenChange={setWorkflowOpen}
+          preview={workflowPreview}
         />
       ) : null}
     </>
