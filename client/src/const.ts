@@ -133,6 +133,23 @@ export const PORTFOLIO_DATA = {
       },
     },
     {
+      id: 8,
+      title: "Zoho CRM Automation Audit",
+      subtitle: "CRM Workflow Optimization",
+      featured: true,
+      problem:
+        "The client's Zoho CRM setup had workflow conflicts, duplicate lead rules, broken email templates, and unclear QuickBooks sync behavior.",
+      solution:
+        "Audited the CRM setup, removed duplicate automation logic, validated WooCommerce order-to-deal flow, repaired email templates, and documented pipeline and forecasting improvements.",
+      result:
+        "Improved CRM reliability and created a clearer roadmap for automation cleanup and process optimization.",
+      description:
+        "Audited and optimized a client's Zoho CRM setup by fixing workflow conflicts, removing duplicate lead rules, validating WooCommerce order-to-deal automation, repairing broken email templates, and documenting pipeline, forecasting, and QuickBooks sync improvements.",
+      tech: ["Zoho CRM", "WooCommerce", "QuickBooks", "CRM Workflows", "Email Templates"],
+      impact: "Reduced duplicate deal creation and cleaned broken CRM automation logic",
+      links: {},
+    },
+    {
       id: 3,
       title: "SM2 Racing",
       subtitle: "Race Data Automation & OCR Pipeline",

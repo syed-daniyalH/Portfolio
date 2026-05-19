@@ -1,0 +1,196 @@
+<svg width="2048" height="685" viewBox="0 0 2048 685" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="2048" y2="685" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#11161F"/>
+      <stop offset="1" stop-color="#0C1017"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .label { fill: #F3F4F6; font-family: Arial, sans-serif; font-size: 22px; font-weight: 600; }
+      .sublabel { fill: #D1D5DB; font-family: Arial, sans-serif; font-size: 20px; font-weight: 500; }
+      .small { fill: #D1D5DB; font-family: Arial, sans-serif; font-size: 16px; font-weight: 500; }
+      .dotline { stroke: #8B93A7; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 10 12; opacity: 0.75; }
+      .solidline { stroke: #B6BCC8; stroke-width: 4; stroke-linecap: round; }
+      .node { fill: #1B202A; stroke: #5B6579; stroke-width: 2; }
+      .tool { fill: #171B24; stroke: #5B6579; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="2048" height="685" rx="0" fill="url(#bg)"/>
+
+  <g opacity="0.16">
+    <path d="M0 16H2048M0 56H2048M0 96H2048M0 136H2048M0 176H2048M0 216H2048M0 256H2048M0 296H2048M0 336H2048M0 376H2048M0 416H2048M0 456H2048M0 496H2048M0 536H2048M0 576H2048M0 616H2048M0 656H2048" stroke="#D1D5DB" stroke-width="1"/>
+    <path d="M30 0V685M70 0V685M110 0V685M150 0V685M190 0V685M230 0V685M270 0V685M310 0V685M350 0V685M390 0V685M430 0V685M470 0V685M510 0V685M550 0V685M590 0V685M630 0V685M670 0V685M710 0V685M750 0V685M790 0V685M830 0V685M870 0V685M910 0V685M950 0V685M990 0V685M1030 0V685M1070 0V685M1110 0V685M1150 0V685M1190 0V685M1230 0V685M1270 0V685M1310 0V685M1350 0V685M1390 0V685M1430 0V685M1470 0V685M1510 0V685M1550 0V685M1590 0V685M1630 0V685M1670 0V685M1710 0V685M1750 0V685M1790 0V685M1830 0V685M1870 0V685M1910 0V685M1950 0V685M1990 0V685M2030 0V685" stroke="#D1D5DB" stroke-width="1"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="42" y="220" width="118" height="138" rx="14" class="node"/>
+    <circle cx="101" cy="262" r="24" stroke="#47E07D" stroke-width="5"/>
+    <path d="M101 244V262L112 272" stroke="#47E07D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="101" y="317" text-anchor="middle" class="sublabel">Schedule</text>
+    <text x="101" y="347" text-anchor="middle" class="sublabel">Trigger</text>
+  </g>
+
+  <g class="solidline">
+    <line x1="160" y1="263" x2="254" y2="263"/>
+    <polygon points="254,263 240,255 240,271" fill="#B6BCC8"/>
+    <line x1="497" y1="263" x2="611" y2="263"/>
+    <polygon points="611,263 597,255 597,271" fill="#B6BCC8"/>
+    <path d="M835 263H938C954 263 966 251 966 235V222" class="solidline" fill="none"/>
+    <polygon points="966,222 958,236 974,236" fill="#B6BCC8"/>
+    <path d="M835 263H938C954 263 966 275 966 291V340" class="solidline" fill="none"/>
+    <polygon points="966,340 958,326 974,326" fill="#B6BCC8"/>
+    <path d="M1158 222H1232C1252 222 1266 239 1266 263" class="solidline" fill="none"/>
+    <path d="M1158 340H1232C1252 340 1266 287 1266 263" class="solidline" fill="none"/>
+    <line x1="1364" y1="263" x2="1422" y2="263"/>
+    <polygon points="1422,263 1408,255 1408,271" fill="#B6BCC8"/>
+    <line x1="1526" y1="263" x2="1584" y2="263"/>
+    <polygon points="1584,263 1570,255 1570,271" fill="#B6BCC8"/>
+    <line x1="1679" y1="263" x2="1738" y2="263"/>
+    <polygon points="1738,263 1724,255 1724,271" fill="#B6BCC8"/>
+    <line x1="1832" y1="263" x2="1920" y2="263"/>
+    <polygon points="1920,263 1906,255 1906,271" fill="#8BE38C"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="269" y="219" width="228" height="90" rx="12" class="node"/>
+    <rect x="301" y="243" width="28" height="35" rx="4" stroke="#2D8CFF" stroke-width="4"/>
+    <path d="M329 252L319 252L329 262" stroke="#2D8CFF" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="339" cy="265" r="7" stroke="#2D8CFF" stroke-width="4"/>
+    <path d="M346 270L356 280" stroke="#2D8CFF" stroke-width="4" stroke-linecap="round"/>
+    <text x="352" y="260" class="label">News &amp; Topic</text>
+    <text x="352" y="292" class="label">Researcher</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="613" y="219" width="223" height="90" rx="12" class="node"/>
+    <path d="M652 253C661 244 675 244 684 253C693 262 693 276 684 285L675 294C666 303 652 303 643 294C634 285 634 271 643 262L652 253Z" stroke="#A855F7" stroke-width="4" fill="none"/>
+    <path d="M659 281L668 272" stroke="#A855F7" stroke-width="4" stroke-linecap="round"/>
+    <text x="690" y="260" class="label">Blog Content</text>
+    <text x="690" y="292" class="label">Creator</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="942" y="147" width="216" height="90" rx="12" class="node"/>
+    <rect x="983" y="177" width="38" height="26" rx="5" stroke="#43D17A" stroke-width="4"/>
+    <circle cx="995" cy="188" r="4" stroke="#43D17A" stroke-width="3"/>
+    <path d="M1006 196L1015 187L1027 199" stroke="#43D17A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1036" y="194" class="label">Generate Image</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="942" y="295" width="216" height="90" rx="12" class="node"/>
+    <text x="979" y="346" fill="#FFC93D" font-family="Arial, sans-serif" font-size="46" font-weight="700">#</text>
+    <text x="1016" y="330" class="label">Hashtag</text>
+    <text x="1016" y="362" class="label">Generator</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1264" y="219" width="100" height="88" rx="10" class="node"/>
+    <circle cx="1305" cy="263" r="7" stroke="#2D8CFF" stroke-width="4"/>
+    <circle cx="1289" cy="246" r="7" stroke="#2D8CFF" stroke-width="4"/>
+    <circle cx="1289" cy="280" r="7" stroke="#2D8CFF" stroke-width="4"/>
+    <path d="M1294 251L1300 257M1294 275L1300 269M1312 263H1322" stroke="#2D8CFF" stroke-width="4" stroke-linecap="round"/>
+    <text x="1314" y="334" text-anchor="middle" class="sublabel">Merge1</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1424" y="219" width="107" height="88" rx="10" class="node"/>
+    <rect x="1456" y="243" width="8" height="42" rx="4" fill="#4285F4"/>
+    <rect x="1464" y="243" width="8" height="42" rx="4" fill="#EA4335"/>
+    <rect x="1472" y="243" width="8" height="42" rx="4" fill="#FBBC05"/>
+    <rect x="1480" y="243" width="8" height="42" rx="4" fill="#34A853"/>
+    <text x="1477" y="334" text-anchor="middle" class="sublabel">Send Approval</text>
+    <text x="1477" y="364" text-anchor="middle" class="sublabel">Email</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1587" y="219" width="99" height="88" rx="10" class="node"/>
+    <circle cx="1636" cy="262" r="22" stroke="#F38BC8" stroke-width="5"/>
+    <path d="M1636 248V262L1646 270" stroke="#F38BC8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1636" y="334" text-anchor="middle" class="sublabel">Wait for</text>
+    <text x="1636" y="364" text-anchor="middle" class="sublabel">Approval</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1740" y="219" width="104" height="88" rx="10" class="node"/>
+    <path d="M1788 241V285M1766 263H1810" stroke="#57D67A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M1768 249C1776 241 1784 241 1792 249" stroke="#57D67A" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M1768 277C1776 285 1784 285 1792 277" stroke="#57D67A" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="1792" y="334" text-anchor="middle" class="sublabel">Is Approved?</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1920" y="218" width="95" height="90" rx="10" class="node"/>
+    <rect x="1957" y="241" width="22" height="43" rx="2" fill="#0A66C2"/>
+    <text x="1968" y="272" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">in</text>
+    <text x="1968" y="334" text-anchor="middle" class="sublabel">LinkedIn</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1760" y="468" width="100" height="90" rx="10" class="node"/>
+    <path d="M1794 499C1806 489 1821 490 1831 501" stroke="#D6D9E0" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M1827 494L1833 502L1825 509" stroke="#D6D9E0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1827 531C1815 541 1800 540 1790 529" stroke="#D6D9E0" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M1794 536L1788 528L1796 521" stroke="#D6D9E0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1810" y="602" text-anchor="middle" class="sublabel">Regen Note</text>
+  </g>
+
+  <g>
+    <line x1="1792" y1="307" x2="1792" y2="468" class="dotline"/>
+    <line x1="1810" y1="558" x2="1810" y2="630" class="dotline"/>
+    <path d="M1810 630H662C646 630 634 618 634 602V402" class="solidline" fill="none"/>
+    <polygon points="634,402 626,416 642,416" fill="#B6BCC8"/>
+    <text x="1858" y="392" fill="#FF554C" font-family="Arial, sans-serif" font-size="18" font-weight="700">False</text>
+    <text x="1872" y="248" fill="#70E07A" font-family="Arial, sans-serif" font-size="18" font-weight="700">True</text>
+  </g>
+
+  <g>
+    <line x1="312" y1="309" x2="312" y2="386" class="dotline"/>
+    <line x1="382" y1="309" x2="382" y2="386" class="dotline"/>
+    <line x1="452" y1="309" x2="452" y2="386" class="dotline"/>
+    <line x1="662" y1="309" x2="662" y2="386" class="dotline"/>
+    <line x1="778" y1="309" x2="778" y2="386" class="dotline"/>
+    <path d="M312 386L270 430" class="dotline" fill="none"/>
+    <path d="M382 386V430" class="dotline" fill="none"/>
+    <path d="M452 386L494 430" class="dotline" fill="none"/>
+    <path d="M662 386V430" class="dotline" fill="none"/>
+    <path d="M778 386V430" class="dotline" fill="none"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="270" cy="455" r="42" class="tool"/>
+    <path d="M254 434C263 428 277 428 286 434M252 465C252 447 266 433 284 433M286 465C286 447 272 433 254 433M256 472C265 478 279 478 288 472" stroke="#D7DBE3" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="270" y="526" text-anchor="middle" class="small">OpenAI java</text>
+    <text x="270" y="551" text-anchor="middle" class="small">Model</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="382" cy="455" r="42" class="tool"/>
+    <text x="382" y="463" text-anchor="middle" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="20" font-weight="700">SerpApi</text>
+    <text x="382" y="526" text-anchor="middle" class="small">SerpAPI</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="494" cy="455" r="42" class="tool"/>
+    <path d="M477 453L490 440M477 453L490 466M510 440L497 453M510 466L497 453" stroke="#3B82F6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="494" y="526" text-anchor="middle" class="small">Structured</text>
+    <text x="494" y="551" text-anchor="middle" class="small">Output Parser</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="662" cy="455" r="42" class="tool"/>
+    <path d="M646 434C655 428 669 428 678 434M644 465C644 447 658 433 676 433M678 465C678 447 664 433 646 433M648 472C657 478 671 478 680 472" stroke="#D7DBE3" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <text x="662" y="526" text-anchor="middle" class="small">OpenAI java</text>
+    <text x="662" y="551" text-anchor="middle" class="small">Model</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="778" cy="455" r="42" class="tool"/>
+    <path d="M760 453L772 440M760 453L772 466M796 440L784 453M796 466L784 453" stroke="#A855F7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="778" y="526" text-anchor="middle" class="small">Structured</text>
+    <text x="778" y="551" text-anchor="middle" class="small">Output Parser</text>
+  </g>
+</svg>

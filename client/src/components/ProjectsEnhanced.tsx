@@ -62,10 +62,10 @@ const WORKFLOW_PREVIEWS: Record<number, WorkflowPreview> = {
     footer: "Original workflow snapshot from the live n8n automation.",
     highlights: ["Schedule trigger", "AI drafting", "Approval loop", "LinkedIn publishing"],
     image: {
-      src: "/workflows/n8n-linkedin-automation.jpg",
+      src: "/workflows/linkedin-content-automation-scenario.svg",
       alt: "n8n workflow for LinkedIn content automation",
       caption:
-        "Original n8n workflow snapshot showing the research, content generation, approval, and LinkedIn publishing path.",
+        "Original LinkedIn content automation scenario showing research, content generation, approval, and publishing flow.",
     },
   },
 };
