@@ -147,7 +147,11 @@ export const PORTFOLIO_DATA = {
         "Built a pipeline that extracts lap times, tire pressures, and race metrics from raw notes/images and sends structured data into Google Sheets.",
       tech: ["Make.com", "OCR", "OpenAI API", "Google Sheets", "Next.js", "FastAPI", "Vercel", "Render"],
       impact: "2hrs -> 5min processing time reduction",
-      links: {},
+      liveDemo: true,
+      link: "https://sm-racing-blush.vercel.app/login",
+      links: {
+        live: "https://sm-racing-blush.vercel.app/login",
+      },
     },
     {
       id: 4,
