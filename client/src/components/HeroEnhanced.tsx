@@ -1,160 +1,165 @@
 import { motion } from "framer-motion";
+import { ArrowRight, Download, MapPin, Sparkles } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/const";
-import Typewriter from "./Typewriter";
+
+const heroHighlights = [
+  "RAG Chatbots",
+  "Workflow Automation",
+  "CRM Integrations",
+  "FastAPI APIs",
+  "n8n / Make.com",
+];
 
 export default function HeroEnhanced() {
-  const nameParts = PORTFOLIO_DATA.personal.name.split(" ");
-  const firstLine = nameParts.slice(0, 2).join(" ");
-  const secondLine = nameParts.slice(2).join(" ");
-
-  const taglines = [
-    "I build systems that run themselves",
-    "AI Automation Engineer",
-    "RAG & Workflow Architect",
-    "n8n · Make.com · OpenAI · FastAPI"
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, type: "spring", stiffness: 100, damping: 15 },
-    },
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated background */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: 'linear-gradient(rgba(37, 99, 235, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
-        }}></div>
-        
-        {/* Gradient orbs */}
-        <motion.div
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, 50, 0]
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-20 right-20 w-96 h-96 bg-[#2563eb] rounded-full mix-blend-multiply filter blur-3xl opacity-10"
-        ></motion.div>
-        <motion.div
-          animate={{ 
-            x: [0, -100, 0],
-            y: [0, -50, 0]
-          }}
-          transition={{ duration: 25, repeat: Infinity }}
-          className="absolute bottom-20 left-20 w-96 h-96 bg-[#06b6d4] rounded-full mix-blend-multiply filter blur-3xl opacity-10"
-        ></motion.div>
+    <section className="relative overflow-hidden pt-28 pb-20 md:pt-32 md:pb-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.06)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20" />
+        <div className="absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute right-12 top-24 h-80 w-80 rounded-full bg-secondary/12 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 container max-w-4xl mx-auto px-4 text-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {/* Main heading */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
-          >
-            <span className="text-foreground">{firstLine}</span>
-            {secondLine ? (
-              <>
-                <br />
-                <span className="bg-gradient-to-r from-[#2563eb] to-[#06b6d4] bg-clip-text text-transparent">
-                  {secondLine}
-                </span>
-              </>
-            ) : null}
-          </motion.h1>
-
-          {/* Typewriter tagline */}
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
           <motion.div
-            variants={itemVariants}
-            className="mb-6 h-16 md:h-20 flex items-center justify-center"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
           >
-            <Typewriter
-              texts={taglines}
-              speed={80}
-              delay={3000}
-              className="text-2xl md:text-3xl font-semibold text-[#06b6d4]"
-            />
-          </motion.div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+              <Sparkles className="h-4 w-4" />
+              {PORTFOLIO_DATA.personal.title}
+            </div>
 
-          {/* Bio */}
-          <motion.p
-            variants={itemVariants}
-            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
-          >
-            AI Automation Engineer building systems that eliminate manual work — n8n, Make.com, RAG pipelines, and FastAPI backends.
-          </motion.p>
+            <h1 className="text-balance text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              {PORTFOLIO_DATA.hero.title}
+            </h1>
 
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(37, 99, 235, 0.5)" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-[#2563eb] text-white font-semibold rounded-lg hover:bg-[#1d4ed8] transition-colors"
-            >
-              View My Work
-            </motion.a>
-            <motion.a
-              href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-              whileHover={{ scale: 1.05, borderColor: "#2563eb" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border-2 border-[#1e293b] text-foreground font-semibold rounded-lg hover:border-[#2563eb] hover:bg-[#0f172a]/50 transition-all"
-            >
-              Download CV
-            </motion.a>
-          </motion.div>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+              {PORTFOLIO_DATA.hero.subtitle}
+            </p>
 
-          {/* Scroll indicator */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-16 flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-muted-foreground"
-            >
-              <svg
-                className="w-6 h-6 mx-auto"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:bg-primary/90"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </motion.div>
+                View Projects
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href={PORTFOLIO_DATA.personal.resumeUrl}
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/70 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/5"
+              >
+                <Download className="h-4 w-4 text-primary" />
+                Download Resume
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-transparent px-6 py-3 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:bg-white/5"
+              >
+                Contact Me
+              </a>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {heroHighlights.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-full border border-border/80 bg-card/70 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur-md"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                {PORTFOLIO_DATA.personal.location}
+              </span>
+              <span className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
+              <span>Available for AI automation and client workflow projects</span>
+            </div>
           </motion.div>
-        </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.1 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/10 blur-2xl" />
+
+            <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-card/85 p-6 shadow-2xl shadow-black/25 backdrop-blur-xl md:p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-primary">Automation profile</p>
+                  <h2 className="mt-3 text-2xl font-semibold text-foreground">Production systems that reduce manual work</h2>
+                </div>
+                <div className="rounded-2xl border border-accent/20 bg-accent/10 px-3 py-2 text-right">
+                  <p className="text-xs uppercase tracking-[0.18em] text-accent">Focus</p>
+                  <p className="text-sm font-semibold text-foreground">AI + Workflow</p>
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-4">
+                {[
+                  {
+                    title: "Workflow automation",
+                    text: "n8n, Make.com, webhooks, and CRM logic for repeatable business processes.",
+                  },
+                  {
+                    title: "AI-powered systems",
+                    text: "RAG chatbots, LLM integrations, and prompt-driven business workflows.",
+                  },
+                  {
+                    title: "Backend delivery",
+                    text: "FastAPI, PostgreSQL, Qdrant, and clean API architecture for production use.",
+                  },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 + index * 0.08 }}
+                    className="rounded-2xl border border-border/80 bg-white/5 p-4 transition-colors hover:bg-white/10"
+                  >
+                    <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.text}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {[
+                  { value: "70%", label: "Manual work reduced", tone: "success" },
+                  { value: "5+", label: "Automation workflows", tone: "primary" },
+                  { value: "15-20 min", label: "Lead response time", tone: "primary" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-border/80 bg-[#0a1220] p-4 text-center"
+                  >
+                    <p
+                      className={`text-2xl font-semibold ${
+                        item.tone === "success" ? "text-accent" : "text-primary"
+                      }`}
+                    >
+                      {item.value}
+                    </p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.aside>
+        </div>
       </div>
     </section>
   );

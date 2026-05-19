@@ -1,88 +1,53 @@
 import { motion } from "framer-motion";
-import { PORTFOLIO_DATA } from "@/const";
 import { Award } from "lucide-react";
+import { PORTFOLIO_DATA } from "@/const";
 
 export default function Certifications() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, type: "spring", stiffness: 100, damping: 15 },
-    },
-  };
-
   return (
-    <section className="relative py-16 md:py-24 bg-background overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#2563eb] rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute right-1/4 top-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 container max-w-5xl mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55 }}
         >
-          {/* Section header */}
-          <div className="mb-12 text-center">
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center justify-center gap-3 mb-4"
-            >
-              <Award className="w-8 h-8 text-[#06b6d4]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Certifications & <span className="text-[#06b6d4]">Credentials</span>
-              </h2>
-            </motion.div>
-            <motion.p
-              variants={itemVariants}
-              className="text-muted-foreground max-w-2xl mx-auto"
-            >
-              Continuous learning and professional development in AI, automation, and backend technologies.
-            </motion.p>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
+              Certifications
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-foreground md:text-4xl">
+              Learning that supports the automation and backend work.
+            </h2>
           </div>
 
-          {/* Certifications grid */}
-          <div className="grid md:grid-cols-2 gap-4">
-            {PORTFOLIO_DATA.certifications.map((cert, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="p-4 rounded-lg border border-[#1e293b] bg-[#0f172a] hover:border-[#06b6d4]/50 transition-all duration-300 group"
+          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {PORTFOLIO_DATA.certifications.map((cert, index) => (
+              <motion.article
+                key={`${cert.title}-${cert.date}`}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                whileHover={{ y: -4 }}
+                className="rounded-3xl border border-border/80 bg-card/80 p-5 shadow-lg shadow-black/10 backdrop-blur-md"
               >
-                <div className="flex items-start gap-3">
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="p-2 rounded-lg bg-[#06b6d4]/10 border border-[#06b6d4]/30 group-hover:bg-[#06b6d4]/20 transition-colors flex-shrink-0"
-                  >
-                    <Award className="w-5 h-5 text-[#06b6d4]" />
-                  </motion.div>
+                <div className="flex items-start gap-4">
+                  <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
+                    <Award className="h-5 w-5" />
+                  </div>
                   <div className="flex-1">
-                    <p className="text-foreground font-semibold group-hover:text-[#06b6d4] transition-colors">
-                      {cert.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {cert.issuer} • {cert.date}
+                    <h3 className="text-lg font-semibold text-foreground">{cert.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {cert.issuer} - {cert.date}
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
         </motion.div>

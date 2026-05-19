@@ -1,140 +1,210 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X, ArrowDownToLine } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { PORTFOLIO_DATA } from "@/const";
+
+const NAV_ITEMS = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
+];
+
+function scrollToTarget(href: string, setIsOpen?: (value: boolean) => void) {
+  const id = href.replace("#", "");
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  setIsOpen?.(false);
+}
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const displayName = PORTFOLIO_DATA.personal.name.split(" ").slice(0, 2).join(" ");
+  const [activeSection, setActiveSection] = useState("home");
+  const displayName = PORTFOLIO_DATA.personal.name;
+  const mobileMenuId = "primary-mobile-navigation";
+
+  const navIdList = useMemo(
+    () => NAV_ITEMS.map((item) => item.href.replace("#", "")),
+    []
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 24);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-    { label: "Experience", href: "#experience" },
-    { label: "Education", href: "#education" },
-    { label: "Contact", href: "#contact" },
-  ];
+  useEffect(() => {
+    const sections = navIdList
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
 
-  const scrollToSection = (href: string) => {
-    const id = href.replace("#", "");
-    const element = document.getElementById(id) || document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+    if (sections.length === 0) {
+      return;
     }
-  };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveSection(visibleEntry.target.id);
+        }
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: [0.1, 0.25, 0.5],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [navIdList]);
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -18 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      aria-label="Primary"
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "bg-[#0f1419]/95 backdrop-blur-md border-b border-[#2a3f5f]/50 shadow-lg shadow-[#d4af37]/10"
-          : "bg-transparent"
+          ? "border-border/80 bg-[#070b14]/90 shadow-[0_12px_40px_rgba(7,11,20,0.55)] backdrop-blur-xl"
+          : "border-transparent bg-transparent"
       }`}
     >
-      <div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => scrollToSection("#home")}
-        >
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#4a90e2] flex items-center justify-center">
-            <span className="text-[#0f1419] font-bold text-xs leading-none">SDH</span>
-          </div>
-          <span className="hidden sm:inline font-bold text-foreground">{displayName}</span>
-        </motion.div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item, idx) => (
-            <motion.button
-              key={idx}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection(item.href)}
-              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-[#d4af37] transition-colors duration-300 relative group"
-            >
-              {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#d4af37] group-hover:w-full transition-all duration-300"></span>
-            </motion.button>
-          ))}
-        </div>
-
-        {/* CTA Button */}
+      <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => scrollToSection("#contact")}
-          className="hidden md:inline-flex px-6 py-2 bg-[#d4af37] text-[#0f1419] font-semibold rounded-lg hover:bg-[#e5c158] transition-all duration-300"
+          type="button"
+          aria-label="Go to home section"
+          onClick={() => scrollToTarget("#home")}
+          whileHover={{ y: -1 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center gap-3 rounded-full border border-border/80 bg-white/5 px-3 py-2 text-left backdrop-blur-md transition-colors hover:bg-white/10"
         >
-          Get In Touch
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-sm font-semibold text-slate-950 shadow-lg shadow-primary/20">
+            SMDH
+          </div>
+          <div className="hidden sm:block">
+            <div className="text-sm font-semibold text-foreground">{displayName}</div>
+            <div className="text-xs text-muted-foreground">{PORTFOLIO_DATA.personal.title}</div>
+          </div>
         </motion.button>
 
-        {/* Mobile menu button */}
+        <div className="hidden lg:flex items-center gap-1 rounded-full border border-border/80 bg-card/70 px-2 py-1 shadow-lg shadow-black/10 backdrop-blur-md">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.href.replace("#", "");
+
+            return (
+              <motion.button
+                key={item.href}
+                type="button"
+                onClick={() => scrollToTarget(item.href)}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                aria-current={isActive ? "page" : undefined}
+                className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-white/10 text-foreground"
+                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                }`}
+              >
+                {item.label}
+                {isActive ? (
+                  <span className="absolute inset-x-4 -bottom-px h-px rounded-full bg-gradient-to-r from-primary to-secondary" />
+                ) : null}
+              </motion.button>
+            );
+          })}
+        </div>
+
+        <div className="hidden md:flex items-center gap-3">
+          <motion.a
+            href={PORTFOLIO_DATA.personal.resumeUrl}
+            download
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90"
+          >
+            <ArrowDownToLine className="h-4 w-4" />
+            Download Resume
+          </motion.a>
+        </div>
+
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-[#1a1f2e] transition-colors"
+          type="button"
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls={mobileMenuId}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          onClick={() => setIsOpen((value) => !value)}
+          className="inline-flex items-center justify-center rounded-full border border-border/80 bg-card/70 p-2.5 text-foreground backdrop-blur-md transition-colors hover:bg-white/5 lg:hidden"
         >
-          {isOpen ? (
-            <X className="w-6 h-6 text-[#d4af37]" />
-          ) : (
-            <Menu className="w-6 h-6 text-[#d4af37]" />
-          )}
+          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </motion.button>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
-        {isOpen && (
+        {isOpen ? (
           <motion.div
+            id={mobileMenuId}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-[#2a3f5f] bg-[#0f1419]/95 backdrop-blur-md"
+            transition={{ duration: 0.24 }}
+            className="border-t border-border/70 bg-[#070b14]/95 backdrop-blur-xl lg:hidden"
           >
-            <div className="container max-w-6xl mx-auto px-4 py-4 space-y-2">
-              {navItems.map((item, idx) => (
-                <motion.button
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  onClick={() => scrollToSection(item.href)}
-                  className="w-full text-left px-4 py-3 text-foreground hover:text-[#d4af37] hover:bg-[#1a1f2e] rounded-lg transition-all duration-300"
+            <div className="container mx-auto max-w-7xl px-4 py-4">
+              <div className="grid gap-2 rounded-3xl border border-border/70 bg-card/80 p-3 shadow-xl shadow-black/20">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = activeSection === item.href.replace("#", "");
+
+                  return (
+                    <motion.button
+                      key={item.href}
+                      type="button"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      onClick={() => scrollToTarget(item.href, setIsOpen)}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors ${
+                        isActive
+                          ? "bg-white/10 text-foreground"
+                          : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive ? <span className="h-2 w-2 rounded-full bg-primary" /> : null}
+                    </motion.button>
+                  );
+                })}
+
+                <motion.a
+                  href={PORTFOLIO_DATA.personal.resumeUrl}
+                  download
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-primary/90"
                 >
-                  {item.label}
-                </motion.button>
-              ))}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.05 }}
-                onClick={() => scrollToSection("#contact")}
-                className="w-full mt-4 px-4 py-3 bg-[#d4af37] text-[#0f1419] font-semibold rounded-lg hover:bg-[#e5c158] transition-all duration-300"
-              >
-                Get In Touch
-              </motion.button>
+                  <ArrowDownToLine className="h-4 w-4" />
+                  Download Resume
+                </motion.a>
+              </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </motion.nav>
   );

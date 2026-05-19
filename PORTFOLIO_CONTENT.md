@@ -129,7 +129,7 @@ Syed Daniyal Haider is a junior AI Automation Engineer with a proven track recor
 **Impact**:
 - ⚡ Saves 3–4 hours of content work per week
 - ⚡ Consistent posting schedule maintained
-- ⚡ AI-generated visuals matching brand
+- Brand-aligned visuals matching the portfolio theme
 
 **Tech Stack**: n8n, OpenAI, DALL-E, SerpAPI, LinkedIn API
 

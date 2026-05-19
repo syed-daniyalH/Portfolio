@@ -1,148 +1,115 @@
 import { motion } from "framer-motion";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import type { ReactNode } from "react";
 import { PORTFOLIO_DATA } from "@/const";
-import { Mail, Linkedin, Github, MessageCircle, ArrowUpRight } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
-const iconMap: Record<string, React.ReactNode> = {
-  Mail: <Mail className="w-6 h-6" />,
-  Linkedin: <Linkedin className="w-6 h-6" />,
-  Github: <Github className="w-6 h-6" />,
-  MessageCircle: <MessageCircle className="w-6 h-6" />,
+const iconMap: Record<string, ReactNode> = {
+  Mail: <Mail className="h-5 w-5" />,
+  Linkedin: <Linkedin className="h-5 w-5" />,
+  Github: <Github className="h-5 w-5" />,
 };
 
 export default function Contact() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-    },
-  };
-
-  const contactVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, type: "spring", stiffness: 100, damping: 15 },
-    },
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.2 },
-    },
-  };
-
   return (
-    <section className="relative py-20 md:py-32 bg-background overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#d4af37]/5 to-[#4a90e2]/5"></div>
-        <div className="absolute top-0 left-1/2 w-96 h-96 bg-[#d4af37] rounded-full mix-blend-multiply filter blur-3xl opacity-5 -translate-x-1/2"></div>
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 container max-w-4xl mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55 }}
         >
-          {/* Section header */}
-          <div className="mb-16 text-center">
-            <motion.h2
-              variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ fontFamily: "Playfair Display, serif" }}
-            >
-              <span className="text-foreground">{PORTFOLIO_DATA.contact.headline.split(" ").slice(0, 2).join(" ")} </span>
-              <span className="text-[#d4af37]">{PORTFOLIO_DATA.contact.headline.split(" ").slice(2).join(" ")}</span>
-            </motion.h2>
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            >
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
+              Contact
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-foreground md:text-4xl">
+              {PORTFOLIO_DATA.contact.headline}
+            </h2>
+            <p className="mt-5 text-base leading-8 text-muted-foreground md:text-lg">
               {PORTFOLIO_DATA.contact.description}
-            </motion.p>
+            </p>
           </div>
 
-          {/* Contact methods */}
-          <motion.div
-            variants={itemVariants}
-            className="grid md:grid-cols-2 gap-6 mb-16"
-          >
-            {PORTFOLIO_DATA.contact.methods.map((method, idx) => (
-              <motion.a
-                key={idx}
-                href={
-                  method.icon === "Mail"
-                    ? `mailto:${PORTFOLIO_DATA.personal.email}`
-                    : method.icon === "Linkedin"
-                    ? PORTFOLIO_DATA.personal.linkedin
-                    : method.icon === "Github"
-                    ? PORTFOLIO_DATA.personal.github
-                    : method.icon === "MessageCircle"
-                    ? `https://wa.me/${method.value.replace(/\D/g, "")}`
-                    : "#"
-                }
-                target={method.icon !== "Mail" ? "_blank" : undefined}
-                rel={method.icon !== "Mail" ? "noopener noreferrer" : undefined}
-                variants={contactVariants}
-                whileHover="hover"
-                className="p-6 rounded-xl border border-[#2a3f5f] bg-[#1a1f2e]/50 backdrop-blur-sm hover:border-[#d4af37]/50 transition-all duration-300 group"
+          <div className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                {PORTFOLIO_DATA.contact.methods.map((method) => {
+                  const Icon = iconMap[method.icon] ?? <Mail className="h-5 w-5" />;
+                  const href =
+                    method.icon === "Mail"
+                      ? `mailto:${PORTFOLIO_DATA.personal.email}`
+                      : method.icon === "Linkedin"
+                      ? PORTFOLIO_DATA.personal.linkedin
+                      : PORTFOLIO_DATA.personal.github;
+
+                  return (
+                    <motion.a
+                      key={method.label}
+                      href={href}
+                      target={method.icon === "Mail" ? undefined : "_blank"}
+                      rel={method.icon === "Mail" ? undefined : "noopener noreferrer"}
+                      aria-label={`Open ${method.label} profile`}
+                      whileHover={{ y: -4 }}
+                      className="group rounded-3xl border border-border/80 bg-card/80 p-5 shadow-lg shadow-black/10 backdrop-blur-md transition-colors hover:border-primary/20 hover:bg-white/5"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
+                          {Icon}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                            {method.label}
+                          </p>
+                          <p className="mt-2 text-sm font-medium text-foreground">
+                            {method.display ?? method.value}
+                          </p>
+                        </div>
+                        <ArrowUpRight className="h-5 w-5 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                      </div>
+                    </motion.a>
+                  );
+                })}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: 0.08 }}
+                className="rounded-3xl border border-primary/15 bg-gradient-to-br from-primary/10 via-card/80 to-secondary/10 p-6 shadow-lg shadow-black/10 backdrop-blur-md"
               >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-[#d4af37]/10 border border-[#d4af37]/30 group-hover:bg-[#d4af37]/20 transition-colors">
-                    <div className="text-[#d4af37]">{iconMap[method.icon]}</div>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm text-muted-foreground mb-1">{method.label}</p>
-                    <p className="text-foreground font-semibold group-hover:text-[#d4af37] transition-colors">
-                      {method.value}
-                    </p>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                  Best fit projects
+                </p>
+                <ul className="mt-4 space-y-3 text-sm leading-7 text-muted-foreground">
+                  <li>AI automation and workflow systems</li>
+                  <li>RAG chatbots and knowledge retrieval apps</li>
+                  <li>CRM, billing, and lead handling integrations</li>
+                  <li>Backend APIs that support real operations</li>
+                </ul>
+              </motion.div>
+            </div>
 
-          {/* Main CTA */}
-          <motion.div
-            variants={itemVariants}
-            className="p-8 md:p-12 rounded-xl border border-[#d4af37]/30 bg-gradient-to-br from-[#d4af37]/10 via-[#4a90e2]/5 to-transparent backdrop-blur-sm text-center"
-          >
-            <h3 className="text-3xl font-bold text-foreground mb-4">Let's Work Together</h3>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Whether you need to automate workflows, integrate AI into your systems, or build scalable backend solutions, I'm ready to help bring your vision to life.
-            </p>
-            <motion.a
-              href={`mailto:${PORTFOLIO_DATA.personal.email}?subject=Let's%20Work%20Together`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-10 py-4 bg-[#d4af37] text-[#0f1419] font-bold rounded-lg hover:bg-[#e5c158] transition-all duration-300 shadow-lg shadow-[#d4af37]/30 text-lg"
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: 0.08 }}
             >
-              Start a Project
-            </motion.a>
-          </motion.div>
+              <ContactForm />
+            </motion.div>
+          </div>
 
-          {/* Footer note */}
-          <motion.p
-            variants={itemVariants}
-            className="mt-12 text-center text-sm text-muted-foreground"
-          >
-            Available for full-time, contract, or project-based opportunities. Typically respond within 15 minutes during business hours.
-          </motion.p>
+          <p className="mt-10 text-center text-sm text-muted-foreground">
+            Typically responsive within business hours. Available for freelance,
+            contract, and full-time opportunities.
+          </p>
         </motion.div>
       </div>
     </section>

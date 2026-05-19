@@ -6,27 +6,26 @@ export default function ScrollProgress() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = window.scrollY;
-      const scrollProgress = windowHeight > 0 ? (scrolled / windowHeight) * 100 : 0;
-      setProgress(scrollProgress);
+      const nextProgress = totalHeight > 0 ? (scrolled / totalHeight) * 100 : 0;
+      setProgress(nextProgress);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d4af37] via-[#4a90e2] to-[#d4af37] z-50"
-      style={{
-        width: `${progress}%`,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-      }}
-    />
+    <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-white/5">
+      <motion.div
+        className="h-full origin-left bg-gradient-to-r from-primary via-secondary to-accent"
+        style={{ scaleX: progress / 100 }}
+        initial={false}
+        animate={{ scaleX: progress / 100 }}
+        transition={{ type: "spring", stiffness: 120, damping: 24 }}
+      />
+    </div>
   );
 }

@@ -1,138 +1,72 @@
 import { motion } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/const";
+import { Sparkles } from "lucide-react";
 
 export default function SkillsDetailed() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const categoryVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-    },
-  };
-
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, type: "spring", stiffness: 100, damping: 15 },
-    },
-  };
-
   return (
-    <section className="relative py-20 md:py-32 bg-[#0f172a] overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2563eb] rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 container max-w-6xl mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
         >
-          {/* Section header */}
-          <div className="mb-16 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold mb-4"
-            >
-              <span className="text-foreground">Technical </span>
-              <span className="text-[#06b6d4]">Expertise</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
-              viewport={{ once: true }}
-              className="text-muted-foreground max-w-2xl mx-auto"
-            >
-              Comprehensive toolkit spanning AI automation, backend development, and modern DevOps practices
-            </motion.p>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
+              Technical Skills
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-foreground md:text-4xl">
+              Organized into the systems I actually use to ship client work.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-muted-foreground md:text-lg">
+              From AI automation and RAG design to backend APIs and deployment,
+              the stack is grouped around how the work is delivered in practice.
+            </p>
           </div>
 
-          {/* Skills grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {Object.entries(PORTFOLIO_DATA.skills).map(([category, data], idx) => (
-              <motion.div
+          <div className="mt-12 grid gap-4 lg:grid-cols-2">
+            {Object.entries(PORTFOLIO_DATA.skills).map(([category, data], index) => (
+              <motion.article
                 key={category}
-                variants={categoryVariants}
-                className="p-6 rounded-xl border border-[#1e293b] bg-[#0f172a] hover:border-[#06b6d4]/50 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                whileHover={{ y: -4 }}
+                className="group rounded-3xl border border-border/80 bg-card/80 p-6 shadow-lg shadow-black/10 backdrop-blur-md"
               >
-                {/* Category header */}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-8 w-1 bg-gradient-to-b from-[#2563eb] to-[#06b6d4] flex-shrink-0 mt-1"></div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground group-hover:text-[#06b6d4] transition-colors">
-                      {category}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1">{data.description}</p>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                      Skill Category
+                    </p>
+                    <h3 className="mt-2 text-xl font-semibold text-foreground">{category}</h3>
+                  </div>
+                  <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
+                    <Sparkles className="h-5 w-5" />
                   </div>
                 </div>
 
-                {/* Skills tags */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {data.items.map((skill, skillIdx) => (
-                    <motion.div
-                      key={skillIdx}
-                      variants={skillVariants}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      initial="hidden"
-                      whileInView="visible"
-                      transition={{ delay: skillIdx * 0.05 }}
-                      viewport={{ once: true }}
-                      className="px-3 py-1.5 rounded-full border border-[#1e293b] bg-[#0a0f1e] hover:bg-[#1e293b] hover:border-[#06b6d4] transition-all duration-300 cursor-pointer"
+                <p className="mt-4 text-sm leading-7 text-muted-foreground">{data.description}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {data.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-border/80 bg-white/5 px-3 py-1.5 text-sm font-medium text-foreground transition-colors group-hover:border-primary/25 group-hover:bg-white/10"
                     >
-                      <span className="text-xs font-medium text-foreground hover:text-[#06b6d4] transition-colors">
-                        {skill}
-                      </span>
-                    </motion.div>
+                      {skill}
+                    </span>
                   ))}
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
-
-          {/* Summary stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
-            viewport={{ once: true }}
-            className="mt-16 p-8 rounded-xl border border-[#1e293b] bg-gradient-to-r from-[#2563eb]/5 via-[#06b6d4]/5 to-transparent"
-          >
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <p className="text-3xl font-bold text-[#06b6d4] mb-2">8+</p>
-                <p className="text-muted-foreground">Skill Categories</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-[#06b6d4] mb-2">40+</p>
-                <p className="text-muted-foreground">Technologies & Tools</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-[#06b6d4] mb-2">5</p>
-                <p className="text-muted-foreground">Professional Certifications</p>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
