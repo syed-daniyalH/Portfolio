@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, BriefcaseBusiness, Image as ImageIcon } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Github, Image as ImageIcon } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/const";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,19 +12,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-type WorkflowSection = {
-  title: string;
-  summary: string;
-  steps: string[];
-};
-
 type WorkflowPreview = {
   badge: string;
   headline: string;
   intro: string;
   footer: string;
-  sections: WorkflowSection[];
-  image?: {
+  highlights: string[];
+  image: {
     src: string;
     alt: string;
     caption: string;
@@ -34,62 +28,31 @@ type WorkflowPreview = {
 const WORKFLOW_PREVIEWS: Record<number, WorkflowPreview> = {
   2: {
     badge: "Make.com Scenarios",
-    headline: "Dispatch Alex workflow scenarios",
+    headline: "Dispatch Alex scenario screenshot",
     intro:
-      "These snapshots mirror the live Make.com dispatch build so visitors can inspect the intake and response flow instead of only reading a summary.",
-    footer: "Workflow snapshots from the live Make.com scenarios.",
-    sections: [
-      {
-        title: "Twilio intake + data lookup",
-        summary:
-          "Inbound SMS is authenticated, matched against services, and checked against dealership records before dispatch logic runs.",
-        steps: [
-          "Twilio",
-          "HTTP Auth token",
-          "HTTP GET Services",
-          "HTTP GET Dealerships",
-          "Array aggregator",
-          "Services checker",
-        ],
-      },
-      {
-        title: "AI routing + response",
-        summary:
-          "The Brain decides the route, The Translator normalizes the payload, and the router returns the customer response.",
-        steps: ["The Brain", "The Translator", "Router", "HTTP", "Response", "Ignore"],
-      },
-    ],
+      "This is the original visual workflow screenshot from the Dispatch Alex project, showing the production-style operations flow instead of a recreated UI mockup.",
+    footer: "Original screenshot from the live Make.com scenario.",
+    highlights: ["Twilio intake", "Service lookup", "AI routing", "Invoice follow-up"],
+    image: {
+      src: "/workflows/dispatch-alex-dashboard.png",
+      alt: "Dispatch Alex Make.com scenario screenshot",
+      caption:
+        "Original Dispatch Alex screenshot showing the live operations dashboard and workflow path.",
+    },
   },
   3: {
     badge: "Make.com Scenarios",
-    headline: "SM2 Racing workflow scenarios",
+    headline: "SM2 Racing scenario screenshot",
     intro:
-      "These snapshots show the original Make.com intake and reporting flows that turn race notes and images into structured data.",
-    footer: "Workflow snapshots from the live Make.com scenarios.",
-    sections: [
-      {
-        title: "Webhook intake + OCR parse",
-        summary:
-          "Race notes and images enter the intake flow, are parsed, and move through OCR and AI extraction.",
-        steps: ["Webhooks", "JSON parser", "Set Variable", "Open AI OCR HTTP", "JSON"],
-      },
-      {
-        title: "Structured reporting",
-        summary:
-          "Extracted race metrics are normalized and written into reporting outputs for the web app and sheets.",
-        steps: [
-          "Backend POST",
-          "Router",
-          "Write to PRESSURES",
-          "Write to ALIGNMENT",
-          "Write to SUSPENSION",
-          "Tire history",
-          "Tire inventory",
-          "Tire temperatures",
-          "Tracks",
-        ],
-      },
-    ],
+      "This is the original Make.com workflow screenshot for SM2 Racing, showing the intake, OCR, and structured reporting pipeline.",
+    footer: "Original screenshot from the live Make.com scenario.",
+    highlights: ["Webhooks", "OCR parsing", "Google Sheets", "Structured reporting"],
+    image: {
+      src: "/workflows/sm2-racing-workflow.png",
+      alt: "SM2 Racing Make.com workflow screenshot",
+      caption:
+        "Original SM2 Racing screenshot showing the data intake flow and reporting path.",
+    },
   },
   5: {
     badge: "n8n Workflow",
@@ -97,32 +60,13 @@ const WORKFLOW_PREVIEWS: Record<number, WorkflowPreview> = {
     intro:
       "This is the original n8n export attached to the project. It shows the full research, drafting, approval, and publishing loop behind the LinkedIn automation.",
     footer: "Original workflow snapshot from the live n8n automation.",
+    highlights: ["Schedule trigger", "AI drafting", "Approval loop", "LinkedIn publishing"],
     image: {
       src: "/workflows/n8n-linkedin-automation.jpg",
       alt: "n8n workflow for LinkedIn content automation",
       caption:
         "Original n8n workflow snapshot showing the research, content generation, approval, and LinkedIn publishing path.",
     },
-    sections: [
-      {
-        title: "Research + drafting",
-        summary:
-          "Schedule Trigger hands off to News & Topic Researcher and Odoo Content Creator to build the post direction.",
-        steps: ["Schedule Trigger", "News & Topic Researcher", "Odoo Content Creator"],
-      },
-      {
-        title: "Creative generation",
-        summary:
-          "Generate Image and Hashtag Generator prepare the visual layer and discovery layer before the outputs merge.",
-        steps: ["Generate Image", "Hashtag Generator", "Merge1"],
-      },
-      {
-        title: "Approval loop + publishing",
-        summary:
-          "The draft is sent for approval, held in a wait state, checked for approval, and then published or regenerated.",
-        steps: ["Send Approval Email1", "Wait for Approval1", "Is Approved?1", "LinkedIn2", "Regen Note"],
-      },
-    ],
   },
 };
 
@@ -145,7 +89,7 @@ function WorkflowPreviewDialog({
                 {preview.badge}
               </span>
               <span className="rounded-full border border-border/70 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                {preview.image ? "Original export" : "Scenario snapshots"}
+                Original export
               </span>
             </div>
             <DialogTitle className="text-2xl font-semibold text-foreground md:text-3xl">
@@ -157,85 +101,34 @@ function WorkflowPreviewDialog({
           </DialogHeader>
         </div>
 
-        <div className="grid gap-4 p-6 md:grid-cols-2 md:p-8">
-          {preview.image ? (
-            <div
-              className="overflow-hidden rounded-3xl border border-border/80 bg-card/70 shadow-lg shadow-black/10 md:col-span-2"
-            >
-              <figure className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
-                <div className="bg-[#060d18] p-4 sm:p-5">
-                  <img
-                    src={preview.image.src}
-                    alt={preview.image.alt}
-                    className="h-auto w-full rounded-2xl border border-border/60 object-contain shadow-2xl shadow-black/30"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <figcaption className="flex flex-col justify-between gap-6 border-t border-border/80 p-5 lg:border-l lg:border-t-0 lg:p-6">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                      Workflow snapshot
-                    </p>
-                    <h3 className="mt-3 text-xl font-semibold text-foreground">
-                      Original n8n export
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                      {preview.image.caption}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Schedule Trigger",
-                      "AI drafting",
-                      "Approval loop",
-                      "LinkedIn publishing",
-                    ].map((label) => (
-                      <span
-                        key={label}
-                        className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-foreground"
-                      >
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                </figcaption>
-              </figure>
-            </div>
-          ) : null}
-
-          {preview.sections.map((section, idx) => (
-            <div
-              key={section.title}
-              className="rounded-3xl border border-border/80 bg-card/70 p-5 shadow-lg shadow-black/10"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                    Step {idx + 1}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-foreground">{section.title}</h3>
-                </div>
-                <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
-                  <ImageIcon className="h-5 w-5" />
-                </div>
+        <div className="space-y-4 p-6 md:p-8">
+          <div className="overflow-hidden rounded-3xl border border-border/80 bg-card/70 shadow-lg shadow-black/10">
+            <figure className="space-y-0">
+              <div className="bg-[#060d18] p-4 sm:p-5">
+                <img
+                  src={preview.image.src}
+                  alt={preview.image.alt}
+                  className="max-h-[72vh] w-full rounded-2xl border border-border/60 object-contain shadow-2xl shadow-black/30"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
+              <figcaption className="border-t border-border/80 px-5 py-4 sm:px-6">
+                <p className="text-sm leading-7 text-muted-foreground">{preview.image.caption}</p>
+              </figcaption>
+            </figure>
+          </div>
 
-              <p className="mt-4 text-sm leading-7 text-muted-foreground">{section.summary}</p>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {section.steps.map((step, stepIdx) => (
-                  <span
-                    key={`${section.title}-${step}`}
-                    className="rounded-full border border-border/80 bg-white/5 px-3 py-1.5 text-xs font-medium text-foreground"
-                  >
-                    {String(stepIdx + 1).padStart(2, "0")}. {step}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {preview.highlights.map((label) => (
+              <span
+                key={label}
+                className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-foreground"
+              >
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="flex items-center justify-between gap-3 border-t border-border/70 px-6 py-5 md:px-8">
@@ -263,6 +156,7 @@ function ProjectCard({
   const [workflowOpen, setWorkflowOpen] = useState(false);
   const workflowPreview = WORKFLOW_PREVIEWS[project.id];
   const liveHref = project.links?.live ?? (project.liveDemo ? project.link : undefined);
+  const repoHref = (project.links as { github?: string } | undefined)?.github;
   const hasWorkflowPreview = Boolean(workflowPreview);
   const workflowButtonLabel = workflowPreview?.badge === "n8n Workflow" ? "View n8n Workflow" : "Make.com Scenarios";
 
@@ -337,6 +231,19 @@ function ProjectCard({
             >
               Live Demo
               <ArrowUpRight className="h-4 w-4" />
+            </a>
+          ) : null}
+
+          {repoHref ? (
+            <a
+              href={repoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/5 px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/30 hover:bg-primary/10"
+              aria-label={`Open GitHub repository for ${project.title}`}
+            >
+              GitHub Repo
+              <Github className="h-4 w-4" />
             </a>
           ) : null}
 

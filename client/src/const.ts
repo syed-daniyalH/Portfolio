@@ -201,7 +201,9 @@ export const PORTFOLIO_DATA = {
         "Built a browser automation engine that searches LinkedIn by role/location, fills Easy Apply forms in real time using LLM-powered answering, and auto-uploads a configured resume. Dashboard tracks application stats live; stealth mode with human-like interactions and randomized click intervals to maintain account safety. Supports OpenAI, Gemini, and DeepSeek as interchangeable LLM backends.",
       tech: ["Python", "Selenium", "OpenAI API", "Flask", "ChromeDriver", "Gemini", "DeepSeek"],
       impact: "Multi-LLM support with stealth automation",
-      links: {},
+      links: {
+        github: "https://github.com/syed-daniyalH/applypilot",
+      },
     },
     {
       id: 7,
