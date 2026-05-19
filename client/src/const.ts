@@ -106,13 +106,13 @@ export const PORTFOLIO_DATA = {
       subtitle: "AI-Powered Automotive CRM Automation",
       featured: true,
       problem:
-        "Inbound SMS, technician assignment, job tracking, and invoicing were taking too long to manage manually.",
+        "Inbound SMS dispatch, service lookup, technician assignment, and invoicing were taking too long to manage manually.",
       solution:
-        "Automated SMS handling with Twilio and OpenAI, routed jobs through FastAPI and PostgreSQL, and generated QuickBooks invoices when work was completed.",
+        "Built a Make.com dispatch scenario that starts with Twilio, authenticates requests, pulls service and dealership data through HTTP, aggregates the records, checks availability, routes the request through an AI decision layer and translator, and returns the dispatch response before invoice follow-up.",
       result:
         "Reduced lead response from 4+ hours to 15-20 minutes and removed repetitive billing work.",
       description:
-        "Automated inbound SMS handling, intent detection, technician assignment, job tracking, and QuickBooks invoice generation. Live at dispatch-alex.vercel.app.",
+        "Automated inbound SMS dispatch routing with Twilio, service and dealership lookups, AI decisioning, technician assignment, and QuickBooks invoice generation. Live at dispatch-alex.vercel.app.",
       tech: [
         "Make.com",
         "FastAPI",

@@ -90,7 +90,7 @@ Syed Daniyal Haider is a junior AI Automation Engineer with a proven track recor
 
 **Challenge**: Manual job assignment and customer communication was taking 10-15 minutes per job, creating bottlenecks in the dealership's workflow.
 
-**Solution**: Built an intelligent SMS-to-action system using Make.com and FastAPI. SMS arrives via Twilio → backend pulls dealership data → OpenAI determines intent → automated reply sent → job auto-assigns technician → QuickBooks auto-invoices on completion.
+**Solution**: Built a Make.com dispatch scenario. SMS arrives via Twilio → requests are authenticated → service and dealership data are fetched over HTTP → records are aggregated → the AI decision layer and translator classify the request → the router sends the right response and follow-up actions → QuickBooks auto-invoices on completion.
 
 **Impact**: 
 - ⚡ 10–15 min → seconds per job assignment
