@@ -219,7 +219,9 @@ export const PORTFOLIO_DATA = {
         "Built a Python pipeline to clean, standardize, and currency-convert multilingual vendor data from multiple regions - reduced manual prep time by 65%. Output formatted to client spec and delivered ready to use without further processing.",
       tech: ["Python", "Pandas", "NumPy", "Jupyter Notebook", "Excel/CSV"],
       impact: "65% reduction in manual data prep time",
-      links: {},
+      links: {
+        github: "https://github.com/syed-daniyalH/Venter-Analysis-Project",
+      },
     },
   ],
 
