@@ -107,7 +107,7 @@ Syed Daniyal Haider is a junior AI Automation Engineer with a proven track recor
 
 **Challenge**: Race teams were spending 2+ hours manually transcribing race notes, extracting data, and updating reports.
 
-**Solution**: Built an OCR + AI pipeline. Raw race notes + images → OCR extraction → OpenAI analysis → tire pressures, lap times, RR bound data extracted → written to Google Sheets → auto-posted to web app.
+**Solution**: Built two Make.com scenarios. Scenario 1 ingests webhooks, parses JSON, sets variables, and sends the data through OCR/OpenAI processing. Scenario 2 takes the extracted race metrics, normalizes them, and posts the structured output to Google Sheets and the web app.
 
 **Impact**:
 - ⚡ 2 hours → under 5 minutes per event

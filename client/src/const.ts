@@ -140,11 +140,11 @@ export const PORTFOLIO_DATA = {
       problem:
         "Race event notes and images were being handled manually, which slowed down reporting and data sharing.",
       solution:
-        "Built an OCR and AI pipeline that extracts lap times, tire pressures, and race metrics from raw notes and images, then pushes structured data into Google Sheets.",
+        "Built two Make.com scenarios: one intake flow that receives webhooks, parses JSON, sets variables, and calls OCR/OpenAI processing, plus a reporting flow that writes the extracted race data into Google Sheets and the web app.",
       result:
         "Reduced event processing from 2 hours to under 5 minutes.",
       description:
-        "Built a pipeline that extracts lap times, tire pressures, and race metrics from raw notes/images and sends structured data into Google Sheets.",
+        "Built two connected Make.com scenarios that extract lap times, tire pressures, and race metrics from race notes/images, normalize the data, and send structured records into Google Sheets and the web app.",
       tech: ["Make.com", "OCR", "OpenAI API", "Google Sheets", "Next.js", "FastAPI", "Vercel", "Render"],
       impact: "2hrs -> 5min processing time reduction",
       liveDemo: true,
