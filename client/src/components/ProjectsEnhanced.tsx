@@ -26,20 +26,6 @@ type WorkflowPreview = {
 };
 
 const WORKFLOW_PREVIEWS: Record<number, WorkflowPreview> = {
-  2: {
-    badge: "Make.com Scenarios",
-    headline: "Dispatch Alex scenario screenshot",
-    intro:
-      "This is the original visual workflow screenshot from the Dispatch Alex project, showing the production-style operations flow instead of a recreated UI mockup.",
-    footer: "Original screenshot from the live Make.com scenario.",
-    highlights: ["Twilio intake", "Service lookup", "AI routing", "Invoice follow-up"],
-    image: {
-      src: "/workflows/dispatch-alex-dashboard.png",
-      alt: "Dispatch Alex Make.com scenario screenshot",
-      caption:
-        "Original Dispatch Alex screenshot showing the live operations dashboard and workflow path.",
-    },
-  },
   3: {
     badge: "Make.com Scenarios",
     headline: "SM2 Racing scenario screenshot",
