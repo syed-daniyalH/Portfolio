@@ -56,6 +56,4 @@ Active portfolio website. The project is a polished static frontend focused on p
 
 ## Developer Credit
 
-Built by Nexol Tech Solutions.
-
 - GitHub: [syed-daniyalH](https://github.com/syed-daniyalH)
